@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CodeFest</string>
+    <string name="remove_text"><u>Remove</u></string>
+</resources>

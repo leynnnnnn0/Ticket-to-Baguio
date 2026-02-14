@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:layout_height="match_parent"
+    tools:context=".OrderDetailsActivity">
+
+    <TextView
+        style="@style/H1"
+        android:layout_marginBottom="10dp"
+        android:text="Order Details"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="30dp">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="212dp"
+            android:layout_weight="1"
+            android:text="Order Number: " />
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:text="ORD-4324-3424"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="30dp">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="212dp"
+            android:layout_weight="1"
+            android:text="Total Amount: " />
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:text="$1,050.00"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="30dp">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Status: "/>
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:text="Completed"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="30dp">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Placed at: "/>
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:textSize="10sp"
+            android:text="February 12, 2026 at 12:00 am"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="30dp">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Completed at: "/>
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:textSize="10sp"
+            android:text=""/>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/H2"
+        android:layout_marginBottom="10dp"
+        android:text="Order Items"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orderDetailsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mark as Completed"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

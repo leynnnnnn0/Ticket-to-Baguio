@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    app:cardCornerRadius="16dp"
+    android:layout_marginBottom="10dp">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="4"
+        android:padding="10dp"
+        android:useDefaultMargins="true">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_columnWeight="3"
+            android:layout_height="match_parent"
+            android:layout_columnSpan="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/orderNumber"
+                style="@style/Label"
+                android:textColor="@color/black"
+                android:text="ORD-348293-423434"/>
+
+            <TextView
+                android:id="@+id/createdAt"
+                style="@style/Label"
+                android:textSize="10sp"
+                android:text="Created At: February 10, 2026 at 12:05 pm"/>
+
+
+            <Button
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:padding="0dp"
+                android:textSize="8dp"
+                android:text="Pending"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1"
+            android:gravity="end|center_vertical"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="$100"/>
+
+
+    </GridLayout>
+
+</androidx.cardview.widget.CardView>

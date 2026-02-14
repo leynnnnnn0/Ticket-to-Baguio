@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditMenuActivity">
+
+    <TextView
+        style="@style/H1"
+        android:text="Edit New Menu"/>
+
+    <TextView
+        style="@style/Label"
+        android:layout_marginTop="20dp"
+        android:text="Image"/>
+
+    <ImageView
+        android:id="@+id/imagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:background="#DDDDDD"/>
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload New Photo"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        style="@style/Label"
+        android:layout_marginTop="10dp"
+        android:text="Name"/>
+
+    <EditText
+        style="@style/EditText"
+        android:hint="Enter the name"/>
+
+    <TextView
+        style="@style/Label"
+        android:layout_marginTop="10dp"
+        android:text="Description"/>
+
+    <EditText
+        style="@style/EditText"
+        android:layout_height="wrap_content"
+        android:hint="Enter the description"
+        android:paddingTop="10dp"
+        android:inputType="textMultiLine"
+        android:minLines="4"
+        android:gravity="top|start"
+        android:scrollbars="vertical"/>
+
+    <TextView
+        style="@style/Label"
+        android:layout_marginTop="10dp"
+        android:text="Price"/>
+
+    <EditText
+        style="@style/EditText"
+        android:inputType="number"
+        android:hint="Enter the price"/>
+
+
+    <Button
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:text="Save"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,47 @@
+package com.example.codefest;
+
+import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.codefest.adapter.CartAdapter;
+import com.example.codefest.model.Menu;
+
+import java.util.ArrayList;
+
+public class CartActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_cart);
+
+        RecyclerView cartRecyclerView = findViewById(R.id.cartRecyclerView);
+        ArrayList<Menu> menuArrayList = new ArrayList<>();
+        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
+        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
+        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
+        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
+        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
+
+        CartAdapter cartAdapter = new CartAdapter(this, menuArrayList);
+
+        cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        cartRecyclerView.setAdapter(cartAdapter);
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+}
