@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert("users", null, contentValues);
 
-        return result != -1;
+        return result == 1;
     }
 
 //    READ QUERIES

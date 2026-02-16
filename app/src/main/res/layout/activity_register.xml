@@ -38,12 +38,11 @@
                 style="@style/Label"/>
 
             <EditText
-                android:id="@+id/editTextUsername"
+                android:id="@+id/usernameInput"
                 style="@style/EditText"
                 android:layout_marginTop="8dp"
                 android:hint="Enter your username"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPersonName" />
 
 
             <TextView
@@ -54,7 +53,7 @@
                 style="@style/Label"/>
 
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/emailInput"
                 style="@style/EditText"
                 android:layout_marginTop="8dp"
                 android:hint="Enter your email"
@@ -71,15 +70,31 @@
                 android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/passwordInput"
                 style="@style/EditText"
                 android:layout_marginTop="8dp"
                 android:hint="Enter your password"
                 android:inputType="textPassword"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Confirm Password"
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/confirmPasswordInput"
+                style="@style/EditText"
+                android:layout_marginTop="8dp"
+                android:hint="Enter your password again"
+                android:inputType="textPassword"
+                />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/register_button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="24dp"
