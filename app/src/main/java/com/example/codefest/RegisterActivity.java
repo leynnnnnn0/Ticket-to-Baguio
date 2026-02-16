@@ -25,11 +25,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        // ✅ Proper ViewBinding setup
+        //  Proper ViewBinding setup
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // ✅ Initialize database
+        //  Initialize database
         databaseHelper = new DatabaseHelper(this);
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
