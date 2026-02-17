@@ -42,6 +42,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result == 1;
     }
 
+    public Boolean insertNewMenu(int menuId, String imagePath, String name, String Description, int price ){
+        return true;
+    }
+
 //    READ QUERIES
     public Boolean checkEmail(String email){
         SQLiteDatabase db = this.getReadableDatabase();
