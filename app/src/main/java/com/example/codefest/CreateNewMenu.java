@@ -12,33 +12,39 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.codefest.database.DatabaseHelper;
+import com.example.codefest.databinding.ActivityCreateNewMenuBinding;
+
+
 public class CreateNewMenu extends AppCompatActivity {
-    private ImageView imagePreview;
-    private Button btnUpload;
+
+    DatabaseHelper databaseHelper;
+    ActivityCreateNewMenuBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_create_new_menu);
-
-
-        imagePreview = findViewById(R.id.imagePreview);
-        btnUpload = findViewById(R.id.btnUpload);
-
-        btnUpload.setOnClickListener(v -> openGallery());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        binding = ActivityCreateNewMenuBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+        binding.uploadButton.setOnClickListener(v -> openGallery());
+
     }
 
     private final ActivityResultLauncher<String> galleryLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(),
                     uri -> {
                         if (uri != null) {
-                            imagePreview.setImageURI(uri);
+                            binding.imagePreview.setImageURI(uri);
                         }
                     });
 
