@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String dbName = "ticket-to-baguio.db";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, dbName, null, 4);
+        super(context, dbName, null, 5);
     }
 
 
@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE users(username TEXT, email TEXT PRIMARY KEY, password TEXT, role TEXT)");
 
-            db.execSQL("CREATE TABLE menu(id INT PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price FLOAT, image BLOB )");
+            db.execSQL("CREATE TABLE menu(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price INTEGER, image BLOB )");
 
             ContentValues cv = new ContentValues();
             cv.put("username", "Admin");
@@ -35,24 +35,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            if (oldVersion < 2) {
-                db.execSQL("ALTER TABLE users ADD COLUMN role TEXT");
-                db.execSQL("DELETE FROM users");
+            // Drop all existing tables
+            db.execSQL("DROP TABLE IF EXISTS users");
+            db.execSQL("DROP TABLE IF EXISTS menu");
 
-            }
-            if (oldVersion < 3 ){
-                ContentValues cv = new ContentValues();
-                cv.put("username", "Admin");
-                cv.put("email", "email@gmail.com");
-                cv.put("password", "admin123");
-                cv.put("role", "admin");
-
-                db.insert("users", null, cv);
-            }
-
-            if (oldVersion < 4){
-                db.execSQL("CREATE TABLE menu(id INT PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price FLOAT, image BLOB )");
-            }
+            // Recreate tables fresh
+            onCreate(db);
         }
 
 //    CREATE QUERIES
@@ -66,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert("users", null, contentValues);
 
-        return result == 1;
+        return result != -1;
     }
     public Boolean insertStaffUser(String username, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -78,11 +66,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert("users", null, contentValues);
 
-        return result == 1;
+        return result != -1;
     }
 
-    public Boolean insertNewMenu(int menuId, String imagePath, String name, String Description, int price ){
-        return true;
+    public boolean insertNewMenu(String name, String description, int price, byte[] image) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("name", name);
+        cv.put("description", description);
+        cv.put("price", price);
+        cv.put("image", image);
+
+        long result = db.insert("menu", null, cv);
+        return result != -1;
     }
 
 //    READ QUERIES

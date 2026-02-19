@@ -15,7 +15,7 @@ import com.example.codefest.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseHelper databaseHelper;
+//    DatabaseHelper databaseHelper;
     ActivityMainBinding binding;
 
     @Override

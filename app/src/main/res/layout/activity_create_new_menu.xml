@@ -61,6 +61,7 @@
     <TextView
         style="@style/Label"
         android:layout_marginTop="10dp"
+        android:inputType="number"
         android:text="Price"/>
 
     <EditText
@@ -71,10 +72,11 @@
 
 
     <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:text="Save"/>
+        android:text="Save" />
 
 
 
