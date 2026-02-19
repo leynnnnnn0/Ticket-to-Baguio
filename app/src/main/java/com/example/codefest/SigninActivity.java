@@ -48,7 +48,7 @@ public class SigninActivity extends AppCompatActivity {
             }
             if (checkCredentials){
                 Toast.makeText(this, "Sign in Successful!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, AdminDashboard.class));
+                startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else {
                 Toast.makeText(this, "Wrong Credentials!", Toast.LENGTH_SHORT).show();

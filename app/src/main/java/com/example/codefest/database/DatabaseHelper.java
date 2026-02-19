@@ -13,29 +13,68 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String dbName = "ticket-to-baguio.db";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, dbName, null, 1);
+        super(context, dbName, null, 4);
     }
 
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users(username TEXT, email TEXT PRIMARY KEY, password TEXT)");
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE users(username TEXT, email TEXT PRIMARY KEY, password TEXT, role TEXT)");
 
-    }
+            db.execSQL("CREATE TABLE menu(id INT PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price FLOAT, image BLOB )");
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS users");
-        onCreate(db);
-    }
+            ContentValues cv = new ContentValues();
+            cv.put("username", "Admin");
+            cv.put("email", "email@gmail.com");
+            cv.put("password", "admin123");
+            cv.put("role", "admin");
+
+            db.insert("users", null, cv);
+
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            if (oldVersion < 2) {
+                db.execSQL("ALTER TABLE users ADD COLUMN role TEXT");
+                db.execSQL("DELETE FROM users");
+
+            }
+            if (oldVersion < 3 ){
+                ContentValues cv = new ContentValues();
+                cv.put("username", "Admin");
+                cv.put("email", "email@gmail.com");
+                cv.put("password", "admin123");
+                cv.put("role", "admin");
+
+                db.insert("users", null, cv);
+            }
+
+            if (oldVersion < 4){
+                db.execSQL("CREATE TABLE menu(id INT PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price FLOAT, image BLOB )");
+            }
+        }
 
 //    CREATE QUERIES
-    public Boolean insertUser(String username, String email, String password){
+    public Boolean insertCustomerUser(String username, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("email", email);
         contentValues.put("password", password);
+        contentValues.put("role", "customer");
+
+        long result = db.insert("users", null, contentValues);
+
+        return result == 1;
+    }
+    public Boolean insertStaffUser(String username, String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("email", email);
+        contentValues.put("password", password);
+        contentValues.put("role", "staff");
 
         long result = db.insert("users", null, contentValues);
 

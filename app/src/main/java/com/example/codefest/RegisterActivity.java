@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            Boolean insertUser = databaseHelper.insertUser(username, email, password);
+            Boolean insertUser = databaseHelper.insertCustomerUser(username, email, password);
 
             if (insertUser){
                 Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
