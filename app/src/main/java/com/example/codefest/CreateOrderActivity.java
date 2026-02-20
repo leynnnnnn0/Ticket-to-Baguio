@@ -13,17 +13,25 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codefest.adapter.MenuAdapter;
+import com.example.codefest.helper.NavHelper;
 import com.example.codefest.model.Menu;
+import com.example.codefest.databinding.ActivityCreateOrderBinding;
+
 
 import java.util.ArrayList;
 
 public class CreateOrderActivity extends AppCompatActivity {
 
+    ActivityCreateOrderBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_create_order);
+
+        binding = ActivityCreateOrderBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         RecyclerView recyclerView = findViewById(R.id.menuRecyclerView);
         ArrayList<Menu> menuArrayList = new ArrayList<>();
@@ -42,6 +50,10 @@ public class CreateOrderActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        binding.backButton.setOnClickListener(v -> {
+            NavHelper.toMainDashboard(this);
         });
     }
 }

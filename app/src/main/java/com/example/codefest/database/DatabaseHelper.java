@@ -13,33 +13,60 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String dbName = "ticket-to-baguio.db";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, dbName, null, 5);
+        super(context, dbName, null, 1);
     }
 
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE users(username TEXT, email TEXT PRIMARY KEY, password TEXT, role TEXT)");
+            db.execSQL("CREATE TABLE users (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "username TEXT, " +
+                    "email TEXT UNIQUE, " +
+                    "password TEXT, " +
+                    "role TEXT)");
 
-            db.execSQL("CREATE TABLE menu(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price INTEGER, image BLOB )");
+            db.execSQL("CREATE TABLE menu (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "name TEXT, " +
+                    "description TEXT, " +
+                    "price INTEGER, " +
+                    "image BLOB)");
 
-            ContentValues cv = new ContentValues();
-            cv.put("username", "Admin");
-            cv.put("email", "email@gmail.com");
-            cv.put("password", "admin123");
-            cv.put("role", "admin");
+            db.execSQL("CREATE TABLE cart (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "userId INTEGER, " +
+                    "menuId INTEGER, " +
+                    "quantity INTEGER, " +
+                    "createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                    "FOREIGN KEY (userId) REFERENCES users (id), " +
+                    "FOREIGN KEY (menuId) REFERENCES menu (id))");
 
-            db.insert("users", null, cv);
+            ContentValues cvAdmin = new ContentValues();
+            cvAdmin.put("username", "Admin");
+            cvAdmin.put("email", "admin@gmail.com");
+            cvAdmin.put("password", "admin123");
+            cvAdmin.put("role", "admin");
+
+            db.insert("users", null, cvAdmin);
+
+            ContentValues cvCustomer = new ContentValues();
+            cvCustomer.put("username", "Customer");
+            cvCustomer.put("email", "customer@gmail.com");
+            cvCustomer.put("password", "customer123");
+            cvCustomer.put("role", "customer");
+
+            db.insert("users", null, cvCustomer);
 
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Drop all existing tables
+
             db.execSQL("DROP TABLE IF EXISTS users");
             db.execSQL("DROP TABLE IF EXISTS menu");
+            db.execSQL("DROP TABLE IF EXISTS cart");
 
-            // Recreate tables fresh
             onCreate(db);
         }
 

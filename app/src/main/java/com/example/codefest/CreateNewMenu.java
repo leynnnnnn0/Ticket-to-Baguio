@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.codefest.database.DatabaseHelper;
 import com.example.codefest.databinding.ActivityCreateNewMenuBinding;
 import com.example.codefest.helper.ImageHelper;
+import com.example.codefest.helper.NavHelper;
 
 
 public class CreateNewMenu extends AppCompatActivity {
@@ -49,6 +50,9 @@ public class CreateNewMenu extends AppCompatActivity {
             return insets;
         });
 
+        binding.backButton.setOnClickListener(v -> {
+            NavHelper.toMainDashboard(this);
+        });
 
         binding.uploadButton.setOnClickListener(v -> openGallery());
 
