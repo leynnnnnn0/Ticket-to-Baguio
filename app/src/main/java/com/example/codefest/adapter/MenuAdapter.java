@@ -35,8 +35,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     @Override
     public void onBindViewHolder(@NonNull MenuAdapter.MenuViewHolder holder, int position) {
         Menu menu = menuArrayList.get(position);
+
+        // Set the name normally
         holder.name.setText(menu.name);
-        holder.price.setText(menu.price);
+
+        // FIX: Convert int to String to avoid Resources$NotFoundException
+        holder.price.setText("₱ " + menu.price);
+
+        // If you prefer just the number without the symbol:
+        // holder.price.setText(String.valueOf(menu.price));
     }
 
     @Override

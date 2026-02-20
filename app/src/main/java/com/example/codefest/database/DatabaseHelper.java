@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.codefest.model.Menu;
+
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String dbName = "ticket-to-baguio.db";
@@ -135,6 +139,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             System.out.println("Error:" + exception);
             return false;
         }
+    }
+
+    public ArrayList<Menu> getAllAvailableMenu() {
+        ArrayList<Menu> menuList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Better to use getColumnIndex so you don't rely on hardcoded numbers (1, 2, 3)
+        Cursor cursor = db.rawQuery("SELECT * FROM menu", null);
+
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                int nameIdx = cursor.getColumnIndex("name");
+                int descIdx = cursor.getColumnIndex("description");
+                int priceIdx = cursor.getColumnIndex("price");
+
+                do {
+                    // image, name, description, price, isOutOfStock
+                    Menu menu = new Menu(
+                            "no",
+                            cursor.getString(nameIdx),
+                            cursor.getString(descIdx),
+                            cursor.getInt(priceIdx),
+                            "test"
+                    );
+                    menuList.add(menu);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+        return menuList;
     }
 
 //    UPDATE QUERIES

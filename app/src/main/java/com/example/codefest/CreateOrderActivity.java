@@ -16,6 +16,7 @@ import com.example.codefest.adapter.MenuAdapter;
 import com.example.codefest.helper.NavHelper;
 import com.example.codefest.model.Menu;
 import com.example.codefest.databinding.ActivityCreateOrderBinding;
+import com.example.codefest.database.DatabaseHelper;
 
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class CreateOrderActivity extends AppCompatActivity {
 
     ActivityCreateOrderBinding binding;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +34,15 @@ public class CreateOrderActivity extends AppCompatActivity {
 
         binding = ActivityCreateOrderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        databaseHelper = new DatabaseHelper(this);
 
-        RecyclerView recyclerView = findViewById(R.id.menuRecyclerView);
-        ArrayList<Menu> menuArrayList = new ArrayList<>();
-        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
-        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
-        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
+        RecyclerView recyclerView = binding.menuRecyclerView;
+        ArrayList<Menu> menuArrayList = databaseHelper.getAllAvailableMenu();
+//        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
+//        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
+//        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
 
         MenuAdapter menuAdapter = new MenuAdapter(this, menuArrayList);
 

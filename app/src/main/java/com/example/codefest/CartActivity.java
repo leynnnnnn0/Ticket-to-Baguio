@@ -31,11 +31,11 @@ public class CartActivity extends AppCompatActivity {
 
         RecyclerView cartRecyclerView = findViewById(R.id.cartRecyclerView);
         ArrayList<Menu> menuArrayList = new ArrayList<>();
-        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
-        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
-        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
+//        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
+//        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
 
         CartAdapter cartAdapter = new CartAdapter(this, menuArrayList);
 
