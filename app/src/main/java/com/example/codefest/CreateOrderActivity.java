@@ -13,25 +13,36 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codefest.adapter.MenuAdapter;
+import com.example.codefest.helper.NavHelper;
 import com.example.codefest.model.Menu;
+import com.example.codefest.databinding.ActivityCreateOrderBinding;
+import com.example.codefest.database.DatabaseHelper;
+
 
 import java.util.ArrayList;
 
 public class CreateOrderActivity extends AppCompatActivity {
 
+    ActivityCreateOrderBinding binding;
+    DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_create_order);
 
-        RecyclerView recyclerView = findViewById(R.id.menuRecyclerView);
-        ArrayList<Menu> menuArrayList = new ArrayList<>();
-        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
-        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
-        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
+        EdgeToEdge.enable(this);
+
+        binding = ActivityCreateOrderBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        databaseHelper = new DatabaseHelper(this);
+
+        RecyclerView recyclerView = binding.menuRecyclerView;
+        ArrayList<Menu> menuArrayList = databaseHelper.getAllAvailableMenu();
+//        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
+//        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
+//        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
 
         MenuAdapter menuAdapter = new MenuAdapter(this, menuArrayList);
 
@@ -42,6 +53,10 @@ public class CreateOrderActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        binding.backButton.setOnClickListener(v -> {
+            NavHelper.toMainDashboard(this);
         });
     }
 }

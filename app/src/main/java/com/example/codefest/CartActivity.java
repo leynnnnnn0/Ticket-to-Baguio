@@ -10,26 +10,32 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.codefest.databinding.ActivityCartBinding;
 import com.example.codefest.adapter.CartAdapter;
+import com.example.codefest.helper.NavHelper;
 import com.example.codefest.model.Menu;
 
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
 
+    ActivityCartBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_cart);
+
+        binding = ActivityCartBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         RecyclerView cartRecyclerView = findViewById(R.id.cartRecyclerView);
         ArrayList<Menu> menuArrayList = new ArrayList<>();
-        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
-        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
-        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
-        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Adobo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Galungong", "wala lang", "45", "yes"));
+//        menuArrayList.add(new Menu("test", "Menudo", "wala lang", "60.45", "yes"));
+//        menuArrayList.add(new Menu("test", "Siraulo", "wala lang", "100", "yes"));
+//        menuArrayList.add(new Menu("test", "Calderata", "wala lang", "100", "yes"));
 
         CartAdapter cartAdapter = new CartAdapter(this, menuArrayList);
 
@@ -42,6 +48,10 @@ public class CartActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        binding.backButton.setOnClickListener(v -> {
+            NavHelper.toMainDashboard(this);
         });
     }
 }

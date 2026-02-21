@@ -9,10 +9,27 @@
     android:layout_height="match_parent"
     tools:context=".CartActivity">
 
-    <TextView
-        style="@style/H1"
-        android:layout_marginBottom="20dp"
-        android:text="Cart Items"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/H1"
+            android:layout_marginBottom="20dp"
+            android:text="Cart Items"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Back" />
+
+    </LinearLayout>
+ 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"

@@ -9,9 +9,25 @@
     android:orientation="vertical"
     tools:context=".CreateNewMenu">
 
-    <TextView
-       style="@style/H1"
-        android:text="Create New Menu"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/H1"
+            android:layout_gravity="center_vertical"
+            android:text="Create New Menu"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Back" />
+
+    </LinearLayout>
 
     <TextView
         style="@style/Label"
@@ -26,7 +42,7 @@
         android:background="#DDDDDD"/>
 
     <Button
-        android:id="@+id/btnUpload"
+        android:id="@+id/uploadButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload Photo"
@@ -38,8 +54,9 @@
         android:text="Name"/>
 
     <EditText
+        android:id="@+id/nameInput"
         style="@style/EditText"
-        android:hint="Enter the name"/>
+        android:hint="Enter the name" />
 
     <TextView
         style="@style/Label"
@@ -47,31 +64,35 @@
         android:text="Description"/>
 
     <EditText
+        android:id="@+id/descriptionInput"
         style="@style/EditText"
         android:layout_height="wrap_content"
+        android:gravity="top|start"
         android:hint="Enter the description"
-        android:paddingTop="10dp"
         android:inputType="textMultiLine"
         android:minLines="4"
-        android:gravity="top|start"
-        android:scrollbars="vertical"/>
+        android:paddingTop="10dp"
+        android:scrollbars="vertical" />
 
     <TextView
         style="@style/Label"
         android:layout_marginTop="10dp"
+        android:inputType="number"
         android:text="Price"/>
 
     <EditText
+        android:id="@+id/priceInput"
         style="@style/EditText"
-        android:inputType="number"
-        android:hint="Enter the price"/>
+        android:hint="Enter the price"
+        android:inputType="number" />
 
 
     <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:text="Save"/>
+        android:text="Save" />
 
 
 

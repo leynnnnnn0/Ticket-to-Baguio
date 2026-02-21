@@ -26,7 +26,7 @@
         android:background="#DDDDDD"/>
 
     <Button
-        android:id="@+id/btnUpload"
+        android:id="@+id/uploadButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload New Photo"
