@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -9,17 +8,17 @@
     android:orientation="vertical"
     tools:context=".CreateNewMenu">
 
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/H1"
             android:layout_gravity="center_vertical"
             android:text="Create New Menu"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/backButton"
@@ -29,39 +28,42 @@
 
     </LinearLayout>
 
+    <!-- Image Section -->
     <TextView
         style="@style/Label"
         android:layout_marginTop="20dp"
-        android:text="Image"/>
+        android:text="Image" />
 
     <ImageView
         android:id="@+id/imagePreview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:background="#DDDDDD"/>
+        android:background="#DDDDDD" />
 
     <Button
         android:id="@+id/uploadButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload Photo"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
+    <!-- Name Input -->
     <TextView
         style="@style/Label"
         android:layout_marginTop="10dp"
-        android:text="Name"/>
+        android:text="Name" />
 
     <EditText
         android:id="@+id/nameInput"
         style="@style/EditText"
         android:hint="Enter the name" />
 
+    <!-- Description Input -->
     <TextView
         style="@style/Label"
         android:layout_marginTop="10dp"
-        android:text="Description"/>
+        android:text="Description" />
 
     <EditText
         android:id="@+id/descriptionInput"
@@ -74,19 +76,57 @@
         android:paddingTop="10dp"
         android:scrollbars="vertical" />
 
-    <TextView
-        style="@style/Label"
-        android:layout_marginTop="10dp"
-        android:inputType="number"
-        android:text="Price"/>
+    <!-- Price & Stock Horizontal Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
-    <EditText
-        android:id="@+id/priceInput"
-        style="@style/EditText"
-        android:hint="Enter the price"
-        android:inputType="number" />
+        <!-- Price -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp">
 
+            <TextView
+                style="@style/Label"
+                android:layout_marginTop="10dp"
+                android:text="Price" />
 
+            <EditText
+                android:id="@+id/priceInput"
+                style="@style/EditText"
+                android:hint="Enter the price"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <!-- Stock -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp">
+
+            <TextView
+                style="@style/Label"
+                android:layout_marginTop="10dp"
+                android:text="Stock" />
+
+            <EditText
+                android:id="@+id/stockInput"
+                style="@style/EditText"
+                android:hint="Enter the stock"
+                android:inputType="number" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Save Button -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
@@ -94,8 +134,4 @@
         android:layout_marginTop="20dp"
         android:text="Save" />
 
-
-
-
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

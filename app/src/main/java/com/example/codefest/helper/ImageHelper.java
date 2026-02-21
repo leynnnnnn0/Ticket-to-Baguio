@@ -2,20 +2,24 @@ package com.example.codefest.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 public class ImageHelper {
 
-        public static  byte[] bitmapToByteArray(Bitmap bitmap){
-            if ( bitmap == null) return null;
+    public static String bitmapToString(Bitmap bitmap) { // store image
+        if (bitmap == null) return null;
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            return stream.toByteArray();
-        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        byte[] bytes = baos.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
 
-        public static Bitmap byteArrayToBitmap(byte[] data){
-            return BitmapFactory.decodeByteArray(data, 0, data.length);
-        }
+    public static Bitmap stringToBitmap(String encodedString) { // read image
+        if (encodedString == null) return null;
+
+        byte[] bytes = Base64.decode(encodedString, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
 }

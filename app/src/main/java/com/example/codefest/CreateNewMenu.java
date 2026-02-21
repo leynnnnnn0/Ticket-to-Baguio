@@ -56,46 +56,53 @@ public class CreateNewMenu extends AppCompatActivity {
 
         binding.uploadButton.setOnClickListener(v -> openGallery());
 
-        binding.saveButton.setOnClickListener(v ->{
+        binding.saveButton.setOnClickListener(v -> {
             String menuName = binding.nameInput.getText().toString().trim();
             String menuDesc = binding.descriptionInput.getText().toString().trim();
             String menuPriceStr = binding.priceInput.getText().toString().trim();
+            String menuStockStr = binding.stockInput.getText().toString().trim();
 
-            if (TextUtils.isEmpty(menuName) || TextUtils.isEmpty(menuDesc) || TextUtils.isEmpty(menuPriceStr)){
+            // Validations
+            if (TextUtils.isEmpty(menuName) || TextUtils.isEmpty(menuDesc) || TextUtils.isEmpty(menuPriceStr) || TextUtils.isEmpty(menuStockStr)) {
                 Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
-
+                return;
             }
 
-            int menuPrice = Integer.parseInt(menuPriceStr);
+            int menuPrice, menuStock;
+            try {
+                menuPrice = Integer.parseInt(menuPriceStr);
+                menuStock = Integer.parseInt(menuStockStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Price and Stock must be numbers!", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             if (menuPrice <= 0){
                 Toast.makeText(this, "Invalid Price", Toast.LENGTH_SHORT).show();
-
+                return;
             }
 
             if (binding.imagePreview.getDrawable() == null){
-                Toast.makeText(this, "Pls Select an Image", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(this, "Please select an Image", Toast.LENGTH_SHORT).show();
+                return;
             }
 
             Bitmap bitmap = ((BitmapDrawable) binding.imagePreview.getDrawable()).getBitmap();
-            byte[] imageBytes = ImageHelper.bitmapToByteArray(bitmap);
+            String image_base64 = ImageHelper.bitmapToString(bitmap);
 
-            if (imageBytes == null || imageBytes.length == 0){
+            if (image_base64 == null || image_base64.isEmpty()) {
                 Toast.makeText(this, "Image processing failed!", Toast.LENGTH_SHORT).show();
-
+                return;
             }
 
-            boolean inserted = databaseHelper.insertNewMenu(menuName, menuDesc, menuPrice, imageBytes);
+            boolean inserted = databaseHelper.insertNewMenu(menuName, menuDesc, menuPrice, menuStock, image_base64);
 
             if (inserted) {
                 Toast.makeText(this, "New Menu Added and is now Available!", Toast.LENGTH_SHORT).show();
                 clearForm();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Failed adding new menu!", Toast.LENGTH_SHORT).show();
             }
-
         });
     }
     private void openGallery() {

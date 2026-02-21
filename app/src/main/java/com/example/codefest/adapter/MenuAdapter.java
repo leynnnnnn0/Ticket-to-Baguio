@@ -1,6 +1,7 @@
 package com.example.codefest.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codefest.R;
+import com.example.codefest.helper.ImageHelper;
 import com.example.codefest.model.Menu;
 
 import java.util.ArrayList;
@@ -36,7 +38,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public void onBindViewHolder(@NonNull MenuAdapter.MenuViewHolder holder, int position) {
         Menu menu = menuArrayList.get(position);
 
-        // Set the name normally
+        Bitmap bitmap = ImageHelper.stringToBitmap(menu.image);
+
+        holder.image.setImageBitmap(bitmap);
         holder.name.setText(menu.name);
 
         // FIX: Convert int to String to avoid Resources$NotFoundException
