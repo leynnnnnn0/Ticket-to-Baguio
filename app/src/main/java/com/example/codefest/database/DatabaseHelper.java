@@ -115,6 +115,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean insertToCart(int userId, int menuId, int quantity){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("userId", userId);
+        cv.put("menuId", menuId);
+        cv.put("quantity", quantity);
+
+        long result = db.insert("cart", null, cv);
+
+        return result != 1;
+    }
+
 //    READ QUERIES
     public Boolean checkEmail(String email){
         SQLiteDatabase db = this.getReadableDatabase();
