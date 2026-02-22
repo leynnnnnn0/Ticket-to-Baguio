@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String dbName = "ticket-to-baguio.db";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, dbName, null, 3);
+        super(context, dbName, null, 4);
     }
 
 
@@ -130,29 +130,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean checkEmailPassword(String email, String password){
+    public int checkEmailPassword(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         try (Cursor cursor = db.rawQuery(
-                "SELECT 1 FROM users WHERE email = ? and password = ?",
+                "SELECT id FROM users WHERE email = ? and password = ?",
                 new String[]{email, password})) {
 
-            return cursor.moveToFirst(); //If true there credentials are correct
+            if (cursor.moveToFirst()){
+                int userId = cursor.getInt(0);
+                cursor.close();
+                return userId;
+            }
+            return -1;
         }
         catch (Exception exception){
             System.out.println("Error:" + exception);
-            return false;
+            return -1;
         }
     }
+
 
     public ArrayList<Menu> getAllAvailableMenu() {
         ArrayList<Menu> menuList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Better to use getColumnIndex so you don't rely on hardcoded numbers (1, 2, 3)
         Cursor cursor = db.rawQuery("SELECT * FROM menu", null);
 
         try {
             if (cursor != null && cursor.moveToFirst()) {
+                int idInx = cursor.getColumnIndex("id");
                 int nameIdx = cursor.getColumnIndex("name");
                 int descIdx = cursor.getColumnIndex("description");
                 int priceIdx = cursor.getColumnIndex("price");
@@ -160,8 +166,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int imageIdx = cursor.getColumnIndex("image_path");
 
                 do {
-                    // image, name, description, price, isOutOfStock
                     Menu menu = new Menu(
+                            cursor.getInt(idInx),
                             cursor.getString(nameIdx),
                             cursor.getString(descIdx),
                             cursor.getInt(priceIdx),

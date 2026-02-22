@@ -2,10 +2,11 @@ package com.example.codefest.model;
 
 public class Menu {
 
-    public String id, image, name, description;
-    public int price, stock;
+    public String image, name, description;
+    public int price, stock, id;
 
-    public Menu(String name, String description, int price, int stock, String image) {
+    public Menu(int id, String name, String description, int price, int stock, String image) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
