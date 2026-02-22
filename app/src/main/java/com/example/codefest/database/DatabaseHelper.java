@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.codefest.helper.SessionHelper;
+import com.example.codefest.model.Cart;
 import com.example.codefest.model.Menu;
 
 import java.util.ArrayList;
@@ -15,9 +17,12 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String dbName = "ticket-to-baguio.db";
+    private  Context context;
 
-    public DatabaseHelper(@Nullable Context context) {
+    public DatabaseHelper(@Nullable Context context)
+    {
         super(context, dbName, null, 5);
+        this.context = context;
     }
 
 
@@ -195,6 +200,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (cursor != null) cursor.close();
         }
         return menuList;
+    }
+
+
+    public ArrayList<Cart> getUserCartItem(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Cart> cartList = new ArrayList<>();
+        int userId = SessionHelper.getUserId(context);
+
+        Cursor cursor = db.rawQuery(
+                "SELECT m.id, m.name, m.price, c.quantity, m.image_path " +
+                        "FROM cart c " +
+                        "INNER JOIN menu m ON c.menuId = m.id " +
+                        "WHERE c.userId = ?",
+                new String[]{String.valueOf(userId)}
+        );
+
+        if (cursor != null && cursor.moveToFirst()){
+            do {
+                Cart cart = new Cart(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getString(4)
+                ); cartList.add(cart);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return cartList;
     }
 
 //    UPDATE QUERIES
