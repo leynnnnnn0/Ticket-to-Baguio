@@ -3,6 +3,7 @@ package com.example.codefest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.codefest.database.DatabaseHelper;
 import  com.example.codefest.databinding.ActivitySigninBinding;
+import com.example.codefest.helper.SessionHelper;
 
 
 public class SigninActivity extends AppCompatActivity {
@@ -40,19 +42,21 @@ public class SigninActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(v -> {
             String email = binding.emailInput.getText().toString().trim();
             String password = binding.passwordInput.getText().toString().trim();
-            Boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
+            int checkCredentials = databaseHelper.checkEmailPassword(email, password);
 
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                 Toast.makeText(this, "All Fields are required!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (checkCredentials){
+            if (checkCredentials == -1){
+                Toast.makeText(this, "Wrong Credentials!", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                Log.d("CHECKID", "USER_ID" + checkCredentials);
+                SessionHelper.setUserId(this, checkCredentials);
                 Toast.makeText(this, "Sign in Successful!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
-            } else {
-                Toast.makeText(this, "Wrong Credentials!", Toast.LENGTH_SHORT).show();
-                return;
             }
         });
     }

@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String dbName = "ticket-to-baguio.db";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, dbName, null, 1);
+        super(context, dbName, null, 4);
     }
 
 
@@ -35,7 +35,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "name TEXT, " +
                     "description TEXT, " +
                     "price INTEGER, " +
-                    "image BLOB)");
+                    "stock INTEGER, " +
+                    "image_path TEXT, " +
+                    "created_at DATETIME DEFAULT CURRENT_TIMESTAMP )");
 
             db.execSQL("CREATE TABLE cart (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -77,39 +79,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //    CREATE QUERIES
     public Boolean insertCustomerUser(String username, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("username", username);
-        contentValues.put("email", email);
-        contentValues.put("password", password);
-        contentValues.put("role", "customer");
+        ContentValues cv = new ContentValues();
+        cv.put("username", username);
+        cv.put("email", email);
+        cv.put("password", password);
+        cv.put("role", "customer");
 
-        long result = db.insert("users", null, contentValues);
+        long result = db.insert("users", null, cv);
 
         return result != -1;
     }
     public Boolean insertStaffUser(String username, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("username", username);
-        contentValues.put("email", email);
-        contentValues.put("password", password);
-        contentValues.put("role", "staff");
+        ContentValues cv = new ContentValues();
+        cv.put("username", username);
+        cv.put("email", email);
+        cv.put("password", password);
+        cv.put("role", "staff");
 
-        long result = db.insert("users", null, contentValues);
+        long result = db.insert("users", null, cv);
 
         return result != -1;
     }
 
-    public boolean insertNewMenu(String name, String description, int price, byte[] image) {
+    public boolean insertNewMenu(String name, String description, int price, int stock, String image_path) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("name", name);
         cv.put("description", description);
         cv.put("price", price);
-        cv.put("image", image);
+        cv.put("stock", stock );
+        cv.put("image_path", image_path);
 
         long result = db.insert("menu", null, cv);
         return result != -1;
+    }
+
+    public boolean insertToCart(int userId, int menuId, int quantity){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("userId", userId);
+        cv.put("menuId", menuId);
+        cv.put("quantity", quantity);
+
+        long result = db.insert("cart", null, cv);
+
+        return result != 1;
     }
 
 //    READ QUERIES
@@ -127,42 +142,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean checkEmailPassword(String email, String password){
+    public int checkEmailPassword(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         try (Cursor cursor = db.rawQuery(
-                "SELECT 1 FROM users WHERE email = ? and password = ?",
+                "SELECT id FROM users WHERE email = ? and password = ?",
                 new String[]{email, password})) {
 
-            return cursor.moveToFirst(); //If true there credentials are correct
+            if (cursor.moveToFirst()){
+                int userId = cursor.getInt(0);
+                cursor.close();
+                return userId;
+            }
+            return -1;
         }
         catch (Exception exception){
             System.out.println("Error:" + exception);
-            return false;
+            return -1;
         }
     }
+
 
     public ArrayList<Menu> getAllAvailableMenu() {
         ArrayList<Menu> menuList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Better to use getColumnIndex so you don't rely on hardcoded numbers (1, 2, 3)
         Cursor cursor = db.rawQuery("SELECT * FROM menu", null);
 
         try {
             if (cursor != null && cursor.moveToFirst()) {
+                int idInx = cursor.getColumnIndex("id");
                 int nameIdx = cursor.getColumnIndex("name");
                 int descIdx = cursor.getColumnIndex("description");
                 int priceIdx = cursor.getColumnIndex("price");
+                int stockIdx = cursor.getColumnIndex("stock");
+                int imageIdx = cursor.getColumnIndex("image_path");
 
                 do {
-                    // image, name, description, price, isOutOfStock
                     Menu menu = new Menu(
-                            "no",
+                            cursor.getInt(idInx),
                             cursor.getString(nameIdx),
                             cursor.getString(descIdx),
                             cursor.getInt(priceIdx),
-                            "test"
-                    );
+                            cursor.getInt(stockIdx),
+                            cursor.getString(imageIdx)
+                            );
                     menuList.add(menu);
                 } while (cursor.moveToNext());
             }
