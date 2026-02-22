@@ -55,6 +55,10 @@ public class CreateOrderActivity extends AppCompatActivity {
             return insets;
         });
 
+        binding.goToCartButton.setOnClickListener(v -> {
+            NavHelper.route(this, CartActivity.class);
+        });
+
         binding.backButton.setOnClickListener(v -> {
             NavHelper.toMainDashboard(this);
         });

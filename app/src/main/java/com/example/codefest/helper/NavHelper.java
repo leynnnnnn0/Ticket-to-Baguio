@@ -13,4 +13,8 @@ public class NavHelper {
     public static void toMainDashboard(Context context){
         navigate(context, MainActivity.class);
     }
+
+    public static void route(Context context, Class<?> route){
+        navigate(context, route);
+    }
 }

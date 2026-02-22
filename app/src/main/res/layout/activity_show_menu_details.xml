@@ -61,8 +61,8 @@
 
     <TextView
         style="@style/Label"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
+        android:layout_marginVertical="10dp"
+
         android:text="This is the ddetails of the menu it will show when a user click a menu from the list thank you so much i don't know what to add here anymore anyways hehe."/>
 
 
