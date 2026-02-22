@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String dbName = "ticket-to-baguio.db";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, dbName, null, 4);
+        super(context, dbName, null, 5);
     }
 
 
