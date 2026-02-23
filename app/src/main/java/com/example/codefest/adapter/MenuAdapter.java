@@ -73,9 +73,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     }
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
-
         MenuListBinding binding;
-
         public MenuViewHolder(MenuListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

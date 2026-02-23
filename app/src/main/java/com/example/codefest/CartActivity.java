@@ -13,13 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.codefest.databinding.ActivityCartBinding;
 import com.example.codefest.adapter.CartAdapter;
 import com.example.codefest.helper.NavHelper;
+import com.example.codefest.model.Cart;
 import com.example.codefest.model.Menu;
+import com.example.codefest.database.DatabaseHelper;
 
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
 
     ActivityCartBinding binding;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +31,12 @@ public class CartActivity extends AppCompatActivity {
 
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        databaseHelper = new DatabaseHelper(this);
 
         RecyclerView cartRecyclerView = findViewById(R.id.cartRecyclerView);
-        ArrayList<Menu> menuArrayList = new ArrayList<>();
+        ArrayList<Cart> cartArrayList = databaseHelper.getUserCartItem();
 
-        CartAdapter cartAdapter = new CartAdapter(this, menuArrayList);
+        CartAdapter cartAdapter = new CartAdapter(this, cartArrayList);
 
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

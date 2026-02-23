@@ -111,6 +111,7 @@ public class CreateNewMenu extends AppCompatActivity {
         binding.nameInput.setText("");
         binding.descriptionInput.setText("");
         binding.priceInput.setText("");
+        binding.stockInput.setText("");
         binding.imagePreview.setImageDrawable(null);
     }
 
