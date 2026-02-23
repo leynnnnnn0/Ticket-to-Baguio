@@ -55,6 +55,7 @@
             android:text="Total: "/>
 
         <TextView
+            android:id="@+id/totalPriceText"
             style="@style/Label"
             android:layout_width="wrap_content"
             android:text="$1,100.50"/>

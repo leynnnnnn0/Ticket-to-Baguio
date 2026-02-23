@@ -46,11 +46,31 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.binding.price.setText(String.valueOf(cart.price));
         holder.binding.quantityText.setText(String.valueOf(cart.quantity));
 
+        holder.binding.increaseButton.setOnClickListener(v -> {
+            cart.quantity++;
+            int quantity = cart.quantity;
 
+            int updatedPrice = cart.price * quantity;
+
+            holder.binding.quantityText.setText(String.valueOf(quantity));
+            holder.binding.price.setText(String.valueOf(updatedPrice));
+        });
+
+        holder.binding.decreaseButton.setOnClickListener(v -> {
+            if (cart.quantity > 1) {
+                cart.quantity--;
+                int quantity = cart.quantity;
+
+                int updatedPrice = cart.price * quantity;
+
+                holder.binding.quantityText.setText(String.valueOf(quantity));
+                holder.binding.price.setText(String.valueOf(updatedPrice));
+
+            }
+        });
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(context, "Clicked: " + cart.name, Toast.LENGTH_SHORT).show();
         });
-
     }
 
     @Override

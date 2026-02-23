@@ -11,4 +11,7 @@ public class Cart {
         this.quantity = quantity;
         this.image = image;
     }
+    public int getTotalPrice() {
+        return price * quantity;
+    }
 }

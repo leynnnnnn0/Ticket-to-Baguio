@@ -23,6 +23,7 @@ public class CartActivity extends AppCompatActivity {
 
     ActivityCartBinding binding;
     DatabaseHelper databaseHelper;
+    ArrayList<Cart> cartArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class CartActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         RecyclerView cartRecyclerView = findViewById(R.id.cartRecyclerView);
-        ArrayList<Cart> cartArrayList = databaseHelper.getUserCartItem();
+         this.cartArrayList = databaseHelper.getUserCartItem();
 
         CartAdapter cartAdapter = new CartAdapter(this, cartArrayList);
 
@@ -49,8 +50,18 @@ public class CartActivity extends AppCompatActivity {
             return insets;
         });
 
+        binding.totalPriceText.setText("₱" + getGrandTotal());
         binding.backButton.setOnClickListener(v -> {
             NavHelper.toMainDashboard(this);
         });
     }
+    public int getGrandTotal() {
+        int total = 0;
+
+        for (Cart cart : cartArrayList) {
+            total += cart.getTotalPrice();
+        }
+        return total;
+    }
+
 }
