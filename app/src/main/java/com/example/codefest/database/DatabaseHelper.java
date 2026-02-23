@@ -166,7 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<Menu> menuList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM menu", null);
+        Cursor cursor = db.rawQuery("SELECT id, name, description, price, stock FROM menu", null);
 
         try {
             if (cursor != null && cursor.moveToFirst()) {
@@ -175,7 +175,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int descIdx = cursor.getColumnIndex("description");
                 int priceIdx = cursor.getColumnIndex("price");
                 int stockIdx = cursor.getColumnIndex("stock");
-                int imageIdx = cursor.getColumnIndex("image_path");
+                int imageIdx = 1;
 
                 do {
                     Menu menu = new Menu(
@@ -184,7 +184,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             cursor.getString(descIdx),
                             cursor.getInt(priceIdx),
                             cursor.getInt(stockIdx),
-                            cursor.getString(imageIdx)
+                           "todo"
                             );
                     menuList.add(menu);
                 } while (cursor.moveToNext());

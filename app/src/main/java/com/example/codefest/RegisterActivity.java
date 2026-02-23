@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.codefest.database.DatabaseHelper;
 import com.example.codefest.databinding.ActivityRegisterBinding;
+import com.example.codefest.helper.NavHelper;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -36,6 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        binding.signin.setOnClickListener(v -> {
+            NavHelper.navigate(this, SigninActivity.class);
         });
 
         binding.registerButton.setOnClickListener(v -> {

@@ -1,63 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:layout_marginVertical="10dp"
-    android:layout_marginHorizontal="10dp">
+    android:background="#f1f1f1"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <LinearLayout
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
+        android:background="#FFFFFF"
+        android:elevation="8dp">
 
-        <Button
-            android:id="@+id/shopButton"
+        <ImageButton
+            android:id="@+id/btn_home"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Shop"
-            android:background="@drawable/modern_button"
-            android:layout_marginEnd="5dp"
-            />
+            android:src="@drawable/ic_home"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Home"/>
 
-        <Button
-            android:id="@+id/cartButton"
+        <ImageButton
+            android:id="@+id/btn_search"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="5dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/modern_button"
-            android:text="My Cart" />
+            android:src="@drawable/ic_search"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Search"/>
 
-        />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/menuButton"
+        <ImageButton
+            android:id="@+id/btn_profile"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Create new Menu"
-            android:background="@drawable/modern_button"/>
-
-        />
-
+            android:src="@drawable/ic_person"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Profile"/>
 
     </LinearLayout>
-
-
-
-
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

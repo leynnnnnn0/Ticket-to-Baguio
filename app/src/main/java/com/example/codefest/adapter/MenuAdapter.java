@@ -43,7 +43,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
         Bitmap bitmap = ImageHelper.stringToBitmap(menu.image);
 
-        holder.binding.image.setImageBitmap(bitmap);
+//        holder.binding.image.setImageBitmap(bitmap);
         holder.binding.name.setText(menu.name);
         holder.binding.price.setText("₱ " + menu.price);
 

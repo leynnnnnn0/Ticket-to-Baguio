@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.codefest.database.DatabaseHelper;
 import  com.example.codefest.databinding.ActivitySigninBinding;
+import com.example.codefest.helper.NavHelper;
 import com.example.codefest.helper.SessionHelper;
 
 
@@ -38,6 +39,8 @@ public class SigninActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        binding.signup.setOnClickListener(v -> NavHelper.navigate(this, RegisterActivity.class));
 
         binding.loginButton.setOnClickListener(v -> {
             String email = binding.emailInput.getText().toString().trim();
