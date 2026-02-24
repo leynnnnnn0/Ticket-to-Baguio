@@ -48,7 +48,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
 
-        Cart cart = cartArrayList.get(position);
+        Cart cart = cartArrayList.get(holder.getBindingAdapterPosition());
+
         Bitmap imageBitmap = ImageHelper.stringToBitmap(cart.image);
 
         holder.binding.imageView.setImageBitmap(imageBitmap);
@@ -75,6 +76,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.itemView.setOnClickListener(v ->
                 Toast.makeText(context, "Clicked: " + cart.name, Toast.LENGTH_SHORT).show()
         );
+
+        holder.binding.removeButton.setOnClickListener(v -> {
+
+            databaseHelper.removeItemInCart(cart.id);
+
+            cartArrayList.remove(holder.getAdapterPosition());
+            notifyItemRemoved(holder.getAdapterPosition());
+            listener.onQuantityChanged();
+
+            Toast.makeText(context,
+                    cart.name + " has been removed from Cart",
+                    Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override

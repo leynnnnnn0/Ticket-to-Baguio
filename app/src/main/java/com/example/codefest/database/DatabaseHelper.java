@@ -232,6 +232,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 //    UPDATE QUERIES
+
+
 //    DELETE QUERIES
+    public void removeItemInCart(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("cart", "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
 
 }
