@@ -30,6 +30,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         databaseHelper = new DatabaseHelper(this);
+
         cartArrayList = databaseHelper.getUserCartItem();
 
         RecyclerView cartRecyclerView = binding.cartRecyclerView;
@@ -41,11 +42,14 @@ public class CartActivity extends AppCompatActivity {
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         cartRecyclerView.setAdapter(cartAdapter);
 
+
         binding.totalPriceText.setText("₱" + getGrandTotal());
 
         binding.backButton.setOnClickListener(v -> {
             NavHelper.toMainDashboard(this);
         });
+
+
     }
 
     public int getGrandTotal() {

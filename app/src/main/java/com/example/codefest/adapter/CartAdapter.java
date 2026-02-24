@@ -78,6 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.itemView.setOnClickListener(v ->{
             Intent intent = new Intent(context, ShowMenuDetailsActivity.class);
             intent.putExtra("MENU_ID", cart.id);
+            intent.putExtra("TYPE", "cart");
             context.startActivity(intent);
 
             Toast.makeText(context, "Clicked: " + cart.name, Toast.LENGTH_SHORT).show();

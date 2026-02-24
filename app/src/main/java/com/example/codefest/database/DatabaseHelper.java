@@ -236,7 +236,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor cursor = db.rawQuery(
-                    "SELECT id, name, description, price, image_path FROM menu WHERE id = ?",
+                    "SELECT id, name, description, price, stock, image_path FROM menu WHERE id = ?",
                     new String[]{String.valueOf(id)}
             );
 
@@ -246,7 +246,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getInt(3),
-                        cursor.getString(4)
+                        cursor.getInt(4),
+                        cursor.getString(5)
                 );
                 return menu;
             }

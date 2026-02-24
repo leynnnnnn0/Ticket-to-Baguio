@@ -9,9 +9,24 @@
     android:layout_height="match_parent"
     tools:context=".EditMenuActivity">
 
-    <TextView
-        style="@style/H1"
-        android:text="Edit New Menu"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/H1"
+            android:layout_gravity="center_vertical"
+            android:text="Edit Menu"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Back" />
+
+    </LinearLayout>
 
     <TextView
         style="@style/Label"
@@ -38,6 +53,7 @@
         android:text="Name"/>
 
     <EditText
+        android:id="@+id/menuText"
         style="@style/EditText"
         android:hint="Enter the name"/>
 
@@ -47,6 +63,7 @@
         android:text="Description"/>
 
     <EditText
+        android:id="@+id/descriptionText"
         style="@style/EditText"
         android:layout_height="wrap_content"
         android:hint="Enter the description"
@@ -56,18 +73,59 @@
         android:gravity="top|start"
         android:scrollbars="vertical"/>
 
-    <TextView
-        style="@style/Label"
-        android:layout_marginTop="10dp"
-        android:text="Price"/>
+    <!-- Price & Stock Horizontal Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
-    <EditText
-        style="@style/EditText"
-        android:inputType="number"
-        android:hint="Enter the price"/>
+        <!-- Price -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp">
+
+            <TextView
+                style="@style/Label"
+                android:layout_marginTop="10dp"
+                android:text="Price" />
+
+            <EditText
+                android:id="@+id/priceInput"
+                style="@style/EditText"
+                android:hint="Enter the price"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <!-- Stock -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp">
+
+            <TextView
+                style="@style/Label"
+                android:layout_marginTop="10dp"
+                android:text="Stock" />
+
+            <EditText
+                android:id="@+id/stockInput"
+                style="@style/EditText"
+                android:hint="Enter the stock"
+                android:inputType="number" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 
     <Button
+        android:id="@+id/saveButton"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"

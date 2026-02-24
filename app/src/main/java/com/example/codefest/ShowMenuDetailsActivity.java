@@ -1,6 +1,9 @@
 package com.example.codefest;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +28,7 @@ public class ShowMenuDetailsActivity extends AppCompatActivity {
     ActivityShowMenuDetailsBinding binding;
     DatabaseHelper databaseHelper;
     private int menuId;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +40,24 @@ public class ShowMenuDetailsActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         menuId = getIntent().getIntExtra("MENU_ID", -1);
+        type = getIntent().getStringExtra("TYPE");
 
         Menu menu = databaseHelper.viewMenuDetails(menuId);
 
+        if (menu == null) {
+            Toast.makeText(this, "Menu not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         binding.menuText.setText(menu.name);
         binding.priceText.setText("₱" + menu.price);
         binding.descriptionText.setText(menu.description);
         binding.imagePreview.setImageBitmap(ImageHelper.stringToBitmap(menu.image));
+
+        if (type.equals("cart")){
+            binding.addToCartButton.setVisibility(View.GONE);
+        }
 
         ArrayList<Review> reviewArrayList = new ArrayList<>();
         reviewArrayList.add(new Review("John Doe", "This taste awful. I will never buy this again!", 1));
@@ -58,8 +72,20 @@ public class ShowMenuDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(reviewAdapter);
 
+        binding.editButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EditMenuActivity.class);
+            intent.putExtra("MENU_ID", menuId);
+            this.startActivity(intent);
+        });
+
         binding.backButton.setOnClickListener(v -> {
-            NavHelper.route(this, CartActivity.class);
+
+            if ("cart".equals(type)) {
+                NavHelper.route(this, CartActivity.class);
+            }
+            else if ("menu".equals(type)) {
+                NavHelper.route(this, CreateOrderActivity.class);
+            }
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

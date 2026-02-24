@@ -1,6 +1,7 @@
 package com.example.codefest.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.codefest.ShowMenuDetailsActivity;
 import com.example.codefest.databinding.MenuListBinding;
 import com.example.codefest.database.DatabaseHelper;
 import com.example.codefest.helper.ImageHelper;
@@ -63,7 +65,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 Toast.makeText(context, menu.name +" failed adding to cart!", Toast.LENGTH_SHORT).show();
                 return;
             }
+        });
 
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ShowMenuDetailsActivity.class);
+            intent.putExtra("MENU_ID", menu.id);
+            intent.putExtra("TYPE", "menu");
+            context.startActivity(intent);
         });
     }
 
