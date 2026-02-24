@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //    DatabaseHelper databaseHelper;
     ActivityMainBinding binding;
-    ImageButton btnHome, btnSearch, btnProfile;
+    ImageButton btnHome, btn_menu, btn_order, btn_sales,btn_settings,btn_staff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,29 +37,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         btnHome    = findViewById(R.id.btn_home);
-        btnSearch  = findViewById(R.id.btn_search);
-        btnProfile = findViewById(R.id.btn_profile);
+        btn_menu    = findViewById(R.id.btn_menu);
+        btn_order   = findViewById(R.id.btn_order);
+        btn_sales   = findViewById(R.id.btn_sales);
+        btn_settings  = findViewById(R.id.btn_settings);
+        btn_staff  = findViewById(R.id.btn_staff);
+
 
         btnHome.setOnClickListener(this);
-        btnSearch.setOnClickListener(this);
-        btnProfile.setOnClickListener(this);
+        btn_menu.setOnClickListener(this);
+        btn_order.setOnClickListener(this);
+        btn_sales.setOnClickListener(this);
+        btn_settings.setOnClickListener(this);
+        btn_staff.setOnClickListener(this);
 
-        loadFragment(new CustomerHomeFragment());
+        loadFragment(new AdminDashboardFragment());
     }
 
 
     public void onClick(View v) {
         if (v.getId() == R.id.btn_home) {
-            loadFragment(new CustomerHomeFragment());
+            loadFragment(new AdminDashboardFragment());
+        }
+        if (v.getId() == R.id.btn_menu) {
+            loadFragment(new AdminMenuFragment());
+        }
+        if (v.getId() == R.id.btn_order) {
+            loadFragment(new AdminOrderFragment());
+        }
+        if (v.getId() == R.id.btn_sales) {
+            loadFragment(new AdminSales());
+        }
+        if (v.getId() == R.id.btn_settings) {
+            loadFragment(new SettingsFragment());
+        }
+        if (v.getId() == R.id.btn_staff) {
+            loadFragment(new AdminStaffFragment());
         }
     }
 
-    private void loadFragment(Fragment fragment) {
+    private void loadFragment(Fragment fragment)
+    {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
     }
+
+
 
 
 }

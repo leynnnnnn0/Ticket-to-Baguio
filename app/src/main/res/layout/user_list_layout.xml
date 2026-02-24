@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:id="@+id/orderListContainer"
+    android:layout_marginVertical="3dp"
+    android:layout_height="70dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/firstName" style="@style/H2" android:text="John"/>
+
+            <TextView android:id="@+id/email" style="@style/H4" android:text="johndoe@gmail.com"/>
+        </LinearLayout>
+
+        <TextView android:id="@+id/details" style="@style/H4" android:text="Details" android:layout_width="wrap_content"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

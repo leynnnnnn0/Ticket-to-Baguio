@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+    <TextView style="@style/H1"
+        android:text="Settings"/>
+
+
+        <TextView style="@style/Label"
+            android:layout_marginTop="10dp"
+            android:text="First Name"/>
+
+        <EditText
+            style="@style/DefaultEditText"
+            android:hint="John"/>
+
+        <TextView style="@style/Label"
+            android:layout_marginTop="10dp"
+            android:text="Last Name"/>
+
+        <EditText
+            style="@style/DefaultEditText"
+            android:hint="Doe"/>
+
+        <TextView style="@style/Label"
+            android:layout_marginTop="10dp"
+            android:text="Phone Number"/>
+
+        <EditText
+            style="@style/DefaultEditText"
+            android:hint="09*88888888"/>
+
+        <TextView style="@style/Label"
+            android:layout_marginTop="10dp"
+            android:text="Email"/>
+
+        <EditText
+            style="@style/DefaultEditText"
+            android:hint="johndoe@gmail.com"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:background="@drawable/modern_button"
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginVertical="10dp"
+            android:text="Save" />
+
+        <TextView style="@style/Label"
+            android:layout_marginTop="10dp"
+            android:text="Current Password"/>
+
+        <EditText
+            style="@style/DefaultEditText"
+            android:hint="********"/>
+
+        <TextView style="@style/Label"
+            android:layout_marginTop="10dp"
+            android:text="New Password"/>
+
+        <EditText
+            style="@style/DefaultEditText"
+            android:hint="********"/>
+
+        <TextView style="@style/Label"
+            android:layout_marginTop="10dp"
+            android:text="Confirm Password"/>
+
+        <EditText
+            style="@style/DefaultEditText"
+            android:hint="********"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:background="@drawable/modern_button"
+            android:id="@+id/updatePasswordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:text="Update Password" />
+    </LinearLayout>
+
+</FrameLayout>

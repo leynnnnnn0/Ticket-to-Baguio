@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -10,79 +11,90 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CodeFest">
-
+        <activity
+            android:name=".AdminShowStaffActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminEditStaffActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCreateStaffActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderItemLayout"
+            android:exported="false" />
+        <activity
+            android:name=".order_items_layout"
+            android:exported="false" />
+        <activity
+            android:name=".AdminShowOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminShowMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShowMenuActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CodeFest" />
+        <activity
+            android:name=".AdminEditMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCreateMenuActivity"
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".OrderDetailsActivity"
             android:exported="false" />
-
         <activity
             android:name=".CartActivity"
-            android:exported="false" />
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
+            android:exported="false" /> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
             android:name=".ShowMenuDetailsActivity"
-            android:exported="true" >
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".EditMenuActivity"
             android:exported="false" />
-
         <activity
             android:name=".CreateNewMenu"
-            android:exported="false"/>
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
+            android:exported="false" /> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
             android:name=".CreateOrderActivity"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
 
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity
             android:name=".AdminDashboard"
             android:exported="false" />
-
         <activity
             android:name=".SigninActivity"
-            android:exported="true" >
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
-<!--                        <intent-filter>-->
-<!--                            <action android:name="android.intent.action.MAIN" />-->
-<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                        </intent-filter>-->
-<!--        </activity>-->
-
+            android:exported="false" />
     </application>
 
 </manifest>

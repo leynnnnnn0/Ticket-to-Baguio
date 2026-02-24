@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminShowOrderActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Label"
+            android:text="Back"
+            android:id="@+id/back"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView style="@style/H1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="Order Details"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Order Number:"/>
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text="ORD-3434-2002"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Total Amount:"/>
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text="$1,090.50"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Placed At:"/>
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text="August 92,2026"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Completed at:"/>
+
+        <TextView
+            style="@style/Label"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text=""/>
+    </LinearLayout>
+
+    <TextView style="@style/H2" android:text="Order Items" android:layout_marginTop="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="Approve Order"
+            android:background="@drawable/modern_button"/>
+    </LinearLayout>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
