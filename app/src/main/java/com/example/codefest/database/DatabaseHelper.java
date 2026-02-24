@@ -206,6 +206,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Cart> getUserCartItem(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Cart> cartList = new ArrayList<>();
+
         int userId = SessionHelper.getUserId(context);
 
         Cursor cursor = db.rawQuery(
@@ -231,7 +232,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cartList;
     }
 
+    public Menu viewMenuDetails(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery(
+                    "SELECT id, name, description, price, image_path FROM menu WHERE id = ?",
+                    new String[]{String.valueOf(id)}
+            );
+
+            if (cursor != null && cursor.moveToFirst()) {
+                Menu menu = new Menu(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getInt(3),
+                        cursor.getString(4)
+                );
+                return menu;
+            }
+            else return  null;
+    }
+
 //    UPDATE QUERIES
+
+
 //    DELETE QUERIES
+    public void removeItemInCart(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("cart", "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
 
 }

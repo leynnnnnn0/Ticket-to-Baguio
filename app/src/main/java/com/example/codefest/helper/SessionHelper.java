@@ -15,5 +15,4 @@ public class SessionHelper {
         SharedPreferences sharedPreferences = context.getSharedPreferences(KEY_USER_ID, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(KEY_USER_ID, -1);
     }
-
 }
