@@ -1,6 +1,7 @@
 package com.example.codefest.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.codefest.ShowMenuDetailsActivity;
 import com.example.codefest.helper.ImageHelper;
 import com.example.codefest.model.Cart;
 import com.example.codefest.databinding.CartListBinding;
@@ -73,9 +75,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
             }
         });
 
-        holder.itemView.setOnClickListener(v ->
-                Toast.makeText(context, "Clicked: " + cart.name, Toast.LENGTH_SHORT).show()
-        );
+        holder.itemView.setOnClickListener(v ->{
+            Intent intent = new Intent(context, ShowMenuDetailsActivity.class);
+            intent.putExtra("MENU_ID", cart.id);
+            context.startActivity(intent);
+
+            Toast.makeText(context, "Clicked: " + cart.name, Toast.LENGTH_SHORT).show();
+
+        });
 
         holder.binding.removeButton.setOnClickListener(v -> {
 
