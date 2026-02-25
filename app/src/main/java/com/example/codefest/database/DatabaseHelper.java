@@ -256,6 +256,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 //    UPDATE QUERIES
 
+    public boolean updateMenu(int id, String name, String description, int price, int stock, String image ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("name", name);
+        cv.put("description", description);
+        cv.put("price", price);
+        cv.put("stock", stock);
+        cv.put("image_path", image);
+
+        long result = db.update("menu", cv, "id = ?", new String[]{String.valueOf(id)});
+
+        return result > 0;
+
+    }
 
 //    DELETE QUERIES
     public void removeItemInCart(int id){

@@ -3,9 +3,12 @@ package com.example.codefest;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -22,6 +25,13 @@ public class EditMenuActivity extends AppCompatActivity {
     ActivityEditMenuBinding binding;
     Menu menu;
     private int menuId;
+    private final ActivityResultLauncher<String> galleryLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(),
+                    uri -> {
+                        if (uri != null) {
+                            binding.imagePreview.setImageURI(uri);
+                        }
+                    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +42,7 @@ public class EditMenuActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         databaseHelper = new DatabaseHelper(this);
 
-        menuId = getIntent().getIntExtra("MENU_ID", -1);
+        menuId = getIntent().getIntExtra("MENU_ID", 1);
 
         if (menuId == -1) {
             Toast.makeText(this, "Invalid menu ID", Toast.LENGTH_SHORT).show();
@@ -47,24 +57,19 @@ public class EditMenuActivity extends AppCompatActivity {
             finish();
             return;
         }
-
-        // Set data safely
         if (menu.image != null) {
             Bitmap bitmap = ImageHelper.stringToBitmap(menu.image);
             binding.imagePreview.setImageBitmap(bitmap);
         }
 
         binding.menuText.setText(menu.name);
-        binding.priceInput.setText(String.valueOf(menu.price)); // NO peso sign here
+        binding.priceInput.setText(String.valueOf(menu.price));
         binding.descriptionText.setText(menu.description);
         binding.stockInput.setText(String.valueOf(menu.stock));
 
-        binding.saveButton.setOnClickListener(v -> {
+        binding.uploadButton.setOnClickListener(v -> openGallery());
 
-            if (binding.imagePreview.getDrawable() == null) {
-                Toast.makeText(this, "Image missing", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        binding.saveButton.setOnClickListener(v -> {
 
             Bitmap bitmap = ((BitmapDrawable) binding.imagePreview.getDrawable()).getBitmap();
             String image_string = ImageHelper.bitmapToString(bitmap);
@@ -74,25 +79,25 @@ public class EditMenuActivity extends AppCompatActivity {
             String priceStr = binding.priceInput.getText().toString().trim();
             String stockStr = binding.stockInput.getText().toString().trim();
 
-            if (priceStr.isEmpty() || stockStr.isEmpty()) {
-                Toast.makeText(this, "Price and Stock cannot be empty", Toast.LENGTH_SHORT).show();
+            if (name.isEmpty() || description.isEmpty() || priceStr.isEmpty() || stockStr.isEmpty() || image_string.isEmpty()) {
+                Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             int price = Integer.parseInt(priceStr);
             int stock = Integer.parseInt(stockStr);
 
-            if (menu.name.equals(name)
-                    && menu.description.equals(description)
-                    && price == menu.price
-                    && stock == menu.stock
-                    && menu.image.equals(image_string)) {
+            boolean updateMenu = databaseHelper.updateMenu(menuId, name, description, price, stock,image_string);
 
-                Toast.makeText(this, "No Information changed!", Toast.LENGTH_SHORT).show();
+            if (updateMenu){
+                Toast.makeText(this, "Menu updated successfully !", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                Toast.makeText(this, "Menu failed to update!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Toast.makeText(this, "Information changed!", Toast.LENGTH_SHORT).show();
+
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -101,4 +106,9 @@ public class EditMenuActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    private void openGallery() {
+        galleryLauncher.launch("image/*");
+    }
+
 }
